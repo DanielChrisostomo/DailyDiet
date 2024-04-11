@@ -6,5 +6,4 @@ export const Container = styled.View`
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
-    padding: 15px;
 `
