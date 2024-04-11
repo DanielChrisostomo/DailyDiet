@@ -1,9 +1,12 @@
 import React from 'react'
 import * as C from "./styles"
+import Header from '@components/Header'
 
 const Home = () => {
   return (
-    <C.Container><C.Texto></C.Texto></C.Container>
+    <C.Container>
+      <Header />
+    </C.Container>
   )
 }
 
