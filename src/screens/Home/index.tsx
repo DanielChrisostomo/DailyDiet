@@ -5,6 +5,11 @@ import PercentageBox from '@components/PercentageBox'
 import Button from '@components/Button'
 
 const Home = () => {
+
+  function addNewMeal (){
+    console.log("add New Meal pressed")
+  }
+
   return (
     <C.Container>
 
@@ -12,7 +17,7 @@ const Home = () => {
       <PercentageBox />
       <C.Texto>Refeições</C.Texto>
 
-      <Button texto="Nova Refeição"><>+</></Button>
+      <Button onPress={addNewMeal} texto="Nova Refeição" typeIcon="PLUS"><>+</></Button>
     </C.Container>
   )
 }
