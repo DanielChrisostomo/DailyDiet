@@ -1,9 +1,11 @@
 import styled from "styled-components/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import theme from "../../theme";
+
 
 export const Container = styled.View`
-    background-color: white;
+    background-color: ${({theme}) => theme.COLORS.WHITE};
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
+    margin-bottom: 36px;
 `

@@ -1,13 +1,19 @@
 import styled, { css } from "styled-components/native"
 import theme from "../../theme";
 import { ArrowUpRight, ArrowLeft  } from "phosphor-react-native"
+import { View } from "react-native";
 
-export const PercentageBox = styled.View`
+export type ContainerTypeStyleProps = "GREEN" | "RED";
+
+type Props = {
+  typeColor?: ContainerTypeStyleProps;
+}
+
+export const PercentageBox = styled(View)<Props>`
     width: 100%;
-    background-color: ${({theme}) => theme.COLORS.GREEN_LIGHT};
-    margin: 36px 0;
+    background-color: ${({theme, typeColor}) => typeColor === "GREEN" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     border-radius: 8px;
-    padding: 25px;
+    padding: 30px;
     position: relative;
 `
 

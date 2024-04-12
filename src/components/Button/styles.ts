@@ -10,7 +10,6 @@ type Props = {
   typeColor: ButtonTypeStyleProps;
 };
 
-
 export const Container = styled(TouchableOpacity)<Props>`
     width: 100%;
     background-color: ${({ theme, typeColor }) =>
@@ -20,7 +19,6 @@ export const Container = styled(TouchableOpacity)<Props>`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 10px 0px;
     `
 
 export const Text = styled.Text`

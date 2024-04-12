@@ -3,9 +3,6 @@ import * as C from "./styles"
 import Logo from "@assets/Logo.svg"
 import User from "@assets/User.svg"
 
-
-
-
 const Header = () => {
   return <C.Container>
     <Logo />
