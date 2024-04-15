@@ -11,8 +11,8 @@ export const Container = styled(TextInput)`
     border: 1px solid ${theme.COLORS.GRAY_5};
   `}
   width: 100%;
-  min-height: 56px;
-  max-height: 56px;
+  min-height: 156px;
+  max-height: 156px;
   border-radius: 8px;
   padding: 8px 16px;
   margin-bottom: 24px;

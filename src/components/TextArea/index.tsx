@@ -6,11 +6,10 @@ type Props = TextInputProps & {
     inputRef?: React.RefObject<TextInput>;
 }
 
-const Input = ({...rest} : Props) => {
+const TextArea = ({...rest} : Props) => {
   return (
     <C.Container {...rest}  />
   )
 }
 
-export default Input
-
+export default TextArea

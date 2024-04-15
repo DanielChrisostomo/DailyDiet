@@ -35,11 +35,11 @@ const Home = () => {
 
   const navigation = useNavigation();
 
-  function handleStatistics (){
+  function navigateToStatistics (){
     navigation.navigate("statistics")
   }
 
-  function handleNewMeal (){
+  function navigateToNewMeal (){
     navigation.navigate("newMeal")
   }
 
@@ -49,13 +49,13 @@ const Home = () => {
 
       <View>
         <PercentageBox typeColor="GREEN" />
-        <C.Button onPress={handleStatistics}>
+        <C.Button onPress={navigateToStatistics}>
           <C.Arrow />
         </C.Button>
       </View>
 
       <C.Texto>Refeições</C.Texto>
-      <Button onPress={handleNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
+      <Button onPress={navigateToNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
 
       <SectionList 
       style={{marginTop: 30}}

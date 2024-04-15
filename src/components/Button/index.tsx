@@ -1,5 +1,4 @@
 import { TouchableOpacityProps } from "react-native"
-import { Trash, ArrowUpRight, ArrowLeft, Plus, PencilSimpleLine  } from "phosphor-react-native"
 
 import * as C from "./styles"
 

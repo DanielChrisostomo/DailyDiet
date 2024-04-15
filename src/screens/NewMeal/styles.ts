@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeft  } from "phosphor-react-native"
-
+import { View } from "react-native";
 
 export const AreaSafeContainer = styled(SafeAreaView)`
     background-color: ${({theme}) => theme.COLORS.GRAY_5};
@@ -37,4 +37,25 @@ export const NewMealContainer = styled.View`
      flex: 1;
      border-radius: 24px;
      padding: 30px;
+`
+
+export const Label = styled.Text`
+     ${({theme}) => css`
+    color: ${theme.COLORS.GRAY_1};
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.MD}px;
+    `}
+    text-align: left;
+    width: 100%;
+    margin-bottom: 6px
+`
+
+export const InRow = styled.View`
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+`
+
+export const FlexOne = styled.View`
+    flex: 1;
 `

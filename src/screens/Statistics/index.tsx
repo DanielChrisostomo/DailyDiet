@@ -6,7 +6,7 @@ const Statistics = () => {
   
   const navigation = useNavigation()
 
-  function handleHome(){
+  function navigateToHome(){
     navigation.navigate("home")
   }
 
@@ -15,7 +15,7 @@ const Statistics = () => {
 
       <C.PercentageContainer>
         <PercentageBox typeColor="GREEN" />
-          <C.Button onPress={handleHome}>
+          <C.Button onPress={navigateToHome}>
             <C.Arrow />
           </C.Button>
       </C.PercentageContainer>
