@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import Input from "@components/Input"
 import TextArea from "@components/TextArea"
 import Button from "@components/Button"
-import { View } from "react-native"
+import { Alert, View } from "react-native"
 import PositiveButton from "@components/PositiveButton"
 import NegativeButton from "@components/NegativeButton"
 
@@ -23,7 +23,15 @@ const NewMeal = () => {
   }
 
   function HandleOnDietNavigation(){
-    console.log("On Diet ?")
+    if (isNegative && isPositive || !isNegative && !isPositive) {
+      Alert.alert("Está dentro da dieta ?", "Por favor, selecione uma opção para marcar se sua refeição está dentro ou fora da dieta");
+    } else if (isNegative) {
+      navigation.navigate("notOnDiet")
+    } else if (isPositive) {
+      navigation.navigate("onDiet")
+    } else {
+      return 
+    }
   }
 
   return (

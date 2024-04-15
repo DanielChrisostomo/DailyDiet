@@ -5,13 +5,15 @@ import { Plus, PencilSimpleLine, Trash } from "phosphor-react-native"
 
 export type ButtonTypeStyleProps = "DARK" | "LIGHT";
 export type ButtonTypeIconProps = "PLUS" | "REMOVE" | "EDIT";
+export type ButtonWidthProps = 200 | '100%';
 
 type Props = {
   typeColor: ButtonTypeStyleProps;
+  width?: ButtonWidthProps;
 };
 
 export const Container = styled(TouchableOpacity)<Props>`
-    width: 100%;
+    width: ${({ width }) => width === '100%' ? '100%' : `${width}px`};
     background-color: ${({ theme, typeColor }) =>
     typeColor === "DARK" ? theme.COLORS.GRAY_2 : theme.COLORS.WHITE};
     height: 60px;
