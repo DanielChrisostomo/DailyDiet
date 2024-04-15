@@ -39,8 +39,8 @@ const Home = () => {
     navigation.navigate("statistics")
   }
 
-  function addNewMeal (){
-    console.log("add New Meal pressed")
+  function handleNewMeal (){
+    navigation.navigate("newMeal")
   }
 
   return (
@@ -55,7 +55,7 @@ const Home = () => {
       </View>
 
       <C.Texto>Refeições</C.Texto>
-      <Button onPress={addNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
+      <Button onPress={handleNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
 
       <SectionList 
       style={{marginTop: 30}}

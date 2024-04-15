@@ -1,11 +1,10 @@
-import { View, StatusBar,  } from "react-native";
+import {  StatusBar,  } from "react-native";
 import { ThemeProvider } from "styled-components";
 import theme from "src/theme";
-import Home from "./src/screens/Home";
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from "@expo-google-fonts/nunito-sans";
 import Loading from "@components/Loading";
-import Statistics from "@screens/Statistics";
 import Routes from "src/routes";
+import NewMeal from "@screens/NewMeal";
 
 // import { Trash, ArrowUpRight, ArrowLeft, Plus, PencilSimpleLine  } from "phosphor-react-native"
 
