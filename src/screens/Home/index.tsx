@@ -1,8 +1,9 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import Header from '@components/Header'
 import PercentageBox from '@components/PercentageBox'
 import Button from '@components/Button'
-import { SectionList } from 'react-native'
+import { SectionList, View } from 'react-native'
 import * as C from "./styles"
 
 type TypeListData = {
@@ -32,18 +33,29 @@ const DATA: TypeListData[] = [
 const Home = () => {
   const [ListData, setListData] = React.useState(DATA)
 
+  const navigation = useNavigation();
+
+  function handleStatistics (){
+    navigation.navigate("statistics")
+  }
+
   function addNewMeal (){
     console.log("add New Meal pressed")
   }
 
   return (
     <C.Container>
-
       <Header />
-      <PercentageBox typeColor="GREEN"/>
-      <C.Texto>Refeições</C.Texto>
 
-      <Button onPress={addNewMeal} texto="Nova Refeição" typeIcon="PLUS"><>+</></Button>
+      <View>
+        <PercentageBox typeColor="GREEN" />
+        <C.Button onPress={handleStatistics}>
+          <C.Arrow />
+        </C.Button>
+      </View>
+
+      <C.Texto>Refeições</C.Texto>
+      <Button onPress={addNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
 
       <SectionList 
       style={{marginTop: 30}}

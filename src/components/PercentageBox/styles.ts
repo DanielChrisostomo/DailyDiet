@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components/native"
 import theme from "../../theme";
-import { ArrowUpRight, ArrowLeft  } from "phosphor-react-native"
 import { View } from "react-native";
 
 export type ContainerTypeStyleProps = "GREEN" | "RED";
@@ -34,14 +33,3 @@ export const Texto = styled.Text`
     ` }
   text-align: center;
 `
-
-export const Button = styled.TouchableOpacity`
-    flex: 1;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-`
-
-export const Arrow = styled(ArrowUpRight).attrs(({theme}) => ({
-    color: theme.COLORS.GREEN_DARK
-}))``;

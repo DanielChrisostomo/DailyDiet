@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components/native";
 import theme from "src/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ArrowLeft  } from "phosphor-react-native"
 import { View } from "react-native";
-
 
 type ContainerTypeStyleProps = "GREEN" | "RED";
 
@@ -15,7 +15,27 @@ export const AreaSafeContainer = styled(SafeAreaView)`
     flex: 1;
 `
 
-export const generalStatisticsContainer = styled.View`
+export const PercentageContainer = styled.View`
+    height: 130px;
+`
+
+export const StatisticBox = styled.View`
+    height: 130px;
+    position: relative;
+`
+
+export const Button = styled.TouchableOpacity`
+    flex: 1;
+    position: absolute;
+    top: 16px;
+    left: 12px;
+`
+
+export const Arrow = styled(ArrowLeft).attrs(({theme}) => ({
+  color: theme.COLORS.GREEN_DARK
+}))``;
+
+export const GeneralStatistics = styled.View`
      background-color: ${({theme}) => theme.COLORS.WHITE};
      flex: 1;
      border-radius: 24px;
@@ -40,7 +60,7 @@ export const GrayContainer = styled.View`
     border-radius: 8px;
 `
 
-export const NumberText = styled.Text`
+export const Num = styled.Text`
    ${({theme}) => css`
     font-size: ${theme.FONT_SIZE.XL}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
@@ -59,13 +79,13 @@ export const RegularText = styled.Text`
     text-align: center;
 `;
 
-export const RowContainer = styled.View`
+export const InRow = styled.View`
     flex-direction: row;
     width: 100%;
     gap: 20px;
 `
 
-export const onAndOffDiet = styled(View)<Props>`
+export const onOrOffDiet = styled(View)<Props>`
     flex: 1;
     background-color: ${({theme, typeColor}) => typeColor === "GREEN" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     border-radius: 8px;
