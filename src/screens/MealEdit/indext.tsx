@@ -6,7 +6,7 @@ import Button from "@components/Button"
 import { Alert, View } from "react-native"
 import ButtonSecundary from "@components/ButtonSecundary"
 
-const NewMeal = () => {
+const MealEdit = () => {
   const [name, setName] = React.useState("")
   const [description, setDescription] = React.useState("")
   const [date, setDate] = React.useState("")
@@ -40,7 +40,7 @@ const NewMeal = () => {
           <C.Button onPress={navigateToHome}>
             <C.Arrow />
           </C.Button>
-          <C.Title>Nova refeição</C.Title>
+          <C.Title>Editar Refeição</C.Title>
         </C.TitleContainer>
 
       <C.NewMealContainer>
@@ -76,11 +76,11 @@ const NewMeal = () => {
         </C.InRow>
         </C.FlexOneView>
 
-        <Button texto="Cadastrar Refeição" onPress={HandleOnDietNavigation}/>
+        <Button texto="Salvar Alterações" onPress={HandleOnDietNavigation}/>
 
       </C.NewMealContainer>
     </C.AreaSafeContainer>
   )
 }
 
-export default NewMeal
+export default MealEdit

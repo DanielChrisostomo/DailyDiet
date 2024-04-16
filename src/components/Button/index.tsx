@@ -10,13 +10,13 @@ type Props = TouchableOpacityProps & {
     width?: C.ButtonWidthProps;
 }
 
-const Button = ( { texto, onPress, typeColor = "DARK", typeIcon, width ,...rest }: Props) => {
+const Button = ( { texto, onPress, typeColor = "DARK", typeIcon, width , ...rest }: Props) => {
   return (
     <C.Container onPress={onPress} typeColor={typeColor} width={width} >
-        {typeIcon === "PLUS" ? <C.AddIcon></C.AddIcon> : null}
-        {typeIcon === "REMOVE" ? <C.TrashIcon></C.TrashIcon> : null}
-        {typeIcon === "EDIT" ? <C.EditIcon></C.EditIcon> : null}
-        <C.Text>{texto}</C.Text>
+        {typeIcon === "PLUS" ? <C.AddIcon typeColor={typeColor}></C.AddIcon> : null}
+        {typeIcon === "REMOVE" ? <C.TrashIcon typeColor={typeColor}></C.TrashIcon> : null}
+        {typeIcon === "EDIT" ? <C.EditIcon typeColor={typeColor}></C.EditIcon> : null}
+        <C.Text typeColor={typeColor}>{texto}</C.Text>
     </C.Container>
   )
 }

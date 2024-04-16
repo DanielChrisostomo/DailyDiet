@@ -53,7 +53,7 @@ export const Texto = styled.Text`
 
 export const Status =  styled.View<StatusProps>`
     background-color: ${({theme, typeSecundary}) => typeSecundary === "GREEN_DARK" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK };
-    height: 12px;
-    width: 12px;
-    border-radius: 7px; 
+    height: 8px;
+    width: 8px;
+    border-radius: 4px; 
     `

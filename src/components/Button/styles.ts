@@ -21,29 +21,33 @@ export const Container = styled(TouchableOpacity)<Props>`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-bottom: 12px;
+    border: ${({ theme, typeColor }) =>
+    typeColor === "LIGHT" ? `1px solid ${theme.COLORS.GRAY_1}` : null };
     `
 
-export const Text = styled.Text`
-   ${({theme}) => css`
-   color: ${theme.COLORS.WHITE};
+export const Text = styled.Text<Props>`
+   ${({theme, typeColor}) => css`
+   color: ${typeColor === "LIGHT" ? `${theme.COLORS.GRAY_1}` : `${theme.COLORS.WHITE}`};
    font-size: ${theme.FONT_SIZE.SM}px;
+   font-family: ${theme.FONT_FAMILY.BOLD}
    `}
 `
 
-export const AddIcon = styled(Plus).attrs(({theme}) => ({
-    color: theme.COLORS.WHITE,
+export const AddIcon = styled(Plus).attrs<Props>(({theme, typeColor}) => ({
+    color: `${typeColor === "LIGHT" ? `${theme.COLORS.GRAY_1}` : `${theme.COLORS.WHITE}`}`,
 }))`
     margin-right: 10px;
 `;
 
-export const TrashIcon = styled(Trash).attrs(({theme})=> ({
-    color: theme.COLORS.WHITE
+export const TrashIcon = styled(Trash).attrs<Props>(({theme, typeColor})=> ({
+    color: `${typeColor === "LIGHT" ? `${theme.COLORS.GRAY_1}` : `${theme.COLORS.WHITE}`}`
 }))`
     margin-right: 10px;
 ` 
 
-export const EditIcon = styled(PencilSimpleLine).attrs(({theme})=> ({
-    color: theme.COLORS.WHITE
+export const EditIcon = styled(PencilSimpleLine).attrs<Props>(({theme, typeColor})=> ({
+    color: `${typeColor === "LIGHT" ? `${theme.COLORS.GRAY_1}` : `${theme.COLORS.WHITE}`}`
 }))`
     margin-right: 10px;
 ` 

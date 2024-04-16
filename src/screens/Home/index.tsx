@@ -43,6 +43,10 @@ const Home = () => {
     navigation.navigate("newMeal")
   }
 
+  function navigateToMealData(){
+    navigation.navigate("mealData")
+  }
+
   return (
     <C.Container>
       <Header />
@@ -58,11 +62,11 @@ const Home = () => {
       <Button onPress={navigateToNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
 
       <SectionList 
-      style={{marginTop: 30}}
+      style={{marginTop: 18}}
       sections={ListData}
       keyExtractor={(item, index) => item + index}
       renderItem={({item}) => (
-          <C.MealContainer>
+          <C.MealContainer onPress={navigateToMealData}>
             <C.MealTime>20:00</C.MealTime>
             <C.StickElement />
             <C.MealText>{item}</C.MealText>

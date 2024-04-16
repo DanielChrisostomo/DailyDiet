@@ -39,7 +39,7 @@ export const MealDate = styled.Text`
     margin-bottom: 6px;
 `
 
-export const MealContainer = styled.View`
+export const MealContainer = styled.TouchableOpacity`
     align-items: center;
     padding: 16px;
     flex-direction: row;
