@@ -4,11 +4,12 @@ import { TextInput, TextInputProps } from 'react-native'
 
 type Props = TextInputProps & {
     inputRef?: React.RefObject<TextInput>;
+    height?:number;
 }
 
-const Input = ({...rest} : Props) => {
+const Input = ( { height, ...rest } : Props) => {
   return (
-    <C.Container {...rest}  />
+    <C.Container {...rest} height={height} />
   )
 }
 

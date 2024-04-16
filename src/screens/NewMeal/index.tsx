@@ -2,19 +2,17 @@ import * as C from "./styles"
 import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import Input from "@components/Input"
-import TextArea from "@components/TextArea"
 import Button from "@components/Button"
 import { Alert, View } from "react-native"
-import PositiveButton from "@components/PositiveButton"
-import NegativeButton from "@components/NegativeButton"
+import ButtonSecundary from "@components/ButtonSecundary"
 
 const NewMeal = () => {
   const [name, setName] = React.useState("")
   const [description, setDescription] = React.useState("")
   const [date, setDate] = React.useState("")
   const [hour, setHour] = React.useState("")
-  const [isPositive, setIsPositive] = React.useState(false);
-  const [isNegative, setIsNegative] = React.useState(false);
+  const [buttonState, setButtonState] = React.useState("REGULAR");
+
 
   const navigation = useNavigation()
 
@@ -23,14 +21,15 @@ const NewMeal = () => {
   }
 
   function HandleOnDietNavigation(){
-    if (isNegative && isPositive || !isNegative && !isPositive) {
-      Alert.alert("Está dentro da dieta ?", "Por favor, selecione uma opção para marcar se sua refeição está dentro ou fora da dieta");
-    } else if (isNegative) {
+    switch( buttonState) {
+      case "GREEN_LIGHT" :
+        navigation.navigate("onDiet")
+        break;
+      case "RED_LIGHT" : 
       navigation.navigate("notOnDiet")
-    } else if (isPositive) {
-      navigation.navigate("onDiet")
-    } else {
-      return 
+      break;
+      default:
+      console.log("Error");
     }
   }
 
@@ -50,7 +49,7 @@ const NewMeal = () => {
         <Input onChangeText={setName} />
 
         <C.Label>Descrição</C.Label>
-        <TextArea onChangeText={setDescription} />
+        <Input height={156} onChangeText={setDescription} />
 
         <C.InRow>
           <C.FlexOne>
@@ -68,16 +67,17 @@ const NewMeal = () => {
         <C.Label>Está dentro da dieta?</C.Label>
         <C.InRow>
           <C.FlexOne>
-            <PositiveButton onPress={() => setIsPositive(!isPositive)} pressed={isPositive} texto="Sim" />
+          <ButtonSecundary onPress={() => setButtonState("GREEN_LIGHT")} pressed={buttonState === "GREEN_LIGHT"} texto="Sim" typePrimaryColor="GREEN_LIGHT" typeSecundary="GREEN_DARK" />
           </C.FlexOne>
 
           <C.FlexOne>
-          <NegativeButton onPress={() => setIsNegative(!isNegative)} pressed={isNegative} texto="Não"/>
+          <ButtonSecundary onPress={() => setButtonState("RED_LIGHT")} pressed={buttonState === "RED_LIGHT"} texto="Não" typePrimaryColor="RED_LIGHT" typeSecundary="RED_DARK" />
           </C.FlexOne>
         </C.InRow>
         </View>
 
         <Button texto="Cadastrar Refeição" onPress={HandleOnDietNavigation}/>
+
       </C.NewMealContainer>
     </C.AreaSafeContainer>
   )

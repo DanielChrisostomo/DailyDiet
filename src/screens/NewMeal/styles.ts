@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeft  } from "phosphor-react-native"
-import { View } from "react-native";
 
 export const AreaSafeContainer = styled(SafeAreaView)`
     background-color: ${({theme}) => theme.COLORS.GRAY_5};
