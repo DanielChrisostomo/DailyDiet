@@ -32,7 +32,7 @@ export const Texto = styled.Text`
 
 export const MealDate = styled.Text`
   ${({theme}) => css`
-    font-size: ${theme.FONT_SIZE.MD}px;
+    font-size: ${theme.FONT_SIZE.LG}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
     color: ${theme.COLORS.GRAY_1};
     ` }
@@ -72,9 +72,13 @@ export const MealText = styled.Text`
     flex: 1;
 `
 
-export const Status =  styled(View)<{ type: "RED" | "GREEN" }>`
-    background-color: ${({ theme, type }) =>
-    type === "GREEN" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+type StatusProps = {
+  typeColor: "RED_LIGHT" | "GREEN_LIGHT";
+};
+
+export const Status =  styled(View)<StatusProps>`
+    background-color: ${({ theme, typeColor }) =>
+    typeColor === "GREEN_LIGHT" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     height: 14px;
     width: 14px;
     border-radius: 7px;

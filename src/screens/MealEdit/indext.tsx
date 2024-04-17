@@ -3,7 +3,6 @@ import React from "react"
 import { useNavigation } from "@react-navigation/native"
 import Input from "@components/Input"
 import Button from "@components/Button"
-import { Alert, View } from "react-native"
 import ButtonSecundary from "@components/ButtonSecundary"
 
 const MealEdit = () => {

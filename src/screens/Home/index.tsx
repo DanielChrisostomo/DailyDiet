@@ -1,37 +1,14 @@
-import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import React, { useCallback } from 'react'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import Header from '@components/Header'
 import PercentageBox from '@components/PercentageBox'
 import Button from '@components/Button'
 import { SectionList, View } from 'react-native'
 import * as C from "./styles"
-
-type TypeListData = {
-    title: string,
-    data: string[],
-}
-
-const DATA: TypeListData[] = [
-  {
-    title: '12.08.22',
-    data: ['Pizza', 'Burger', 'Risotto', 'Cheese Cake'],
-  },
-  {
-    title: '11.08.22',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-  },
-  {
-    title: '10.08.22',
-    data: ['Water', 'Coke', 'Beer'],
-  },
-  {
-    title: '9.08.22',
-    data: ['Cheese Cake', 'Ice Cream'],
-  },
-];
+import { getAllMeals } from '@storage/meals/getAllMeals'
 
 const Home = () => {
-  const [ListData, setListData] = React.useState(DATA)
+  const [ListData, setListData] = React.useState([])
 
   const navigation = useNavigation();
 
@@ -39,13 +16,26 @@ const Home = () => {
     navigation.navigate("statistics")
   }
 
-  function navigateToNewMeal (){
-    navigation.navigate("newMeal")
+ async function navigateToNewMeal (){
+    navigation.navigate( "newMeal")
   }
 
   function navigateToMealData(){
     navigation.navigate("mealData")
   }
+
+  async function fetchMeals() {
+    try {
+      const data = await getAllMeals()
+      setListData(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useFocusEffect(useCallback(() => {
+    fetchMeals()
+  }, []))
 
   return (
     <C.Container>
@@ -62,21 +52,21 @@ const Home = () => {
       <Button onPress={navigateToNewMeal} texto="Nova Refeição" typeIcon="PLUS" />
 
       <SectionList 
-      style={{marginTop: 18}}
-      sections={ListData}
-      keyExtractor={(item, index) => item + index}
-      renderItem={({item}) => (
-          <C.MealContainer onPress={navigateToMealData}>
-            <C.MealTime>20:00</C.MealTime>
-            <C.StickElement />
-            <C.MealText>{item}</C.MealText>
-            <C.Status type="GREEN" />
-          </C.MealContainer>
-      )}
-      renderSectionHeader={({section: {title}}) => (
-        <C.MealDate style={{fontSize: 22}}>{title}</C.MealDate>
-      )}
-    />
+        style={{marginTop: 18}}
+        sections={ListData}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => (
+    <C.MealContainer onPress={navigateToMealData}>
+      <C.MealTime>{item.hour}</C.MealTime>
+      <C.StickElement />
+      <C.MealText>{item.meal}</C.MealText>
+      <C.Status typeColor={item.status === 'GREEN_LIGHT' ? 'GREEN_LIGHT' : 'RED_LIGHT'} />
+    </C.MealContainer>
+  )}
+  renderSectionHeader={({section: {title}}) => (
+    <C.MealDate>{title}</C.MealDate>
+  )}
+/>
     </C.Container>
   )
 }
