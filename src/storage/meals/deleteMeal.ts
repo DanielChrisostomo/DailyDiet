@@ -2,15 +2,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MEAL_DATA } from "@storage/StorageConfig";
 import { getAllMeals } from "./getAllMeals";
 import { DataEntry, Meal } from "src/@types/dataMealTypes";
+import { AppError } from "@utils/AppError";
 
 type singleMealInfoType = {
   day: string;
-  data: {
-    description: string;
-    meal: string;
-    hour: string;
-    status: string;
-  };
+  data: Meal;
 };
 
 export async function deleteMeal(mealInfoDataEntry: singleMealInfoType) {
@@ -38,6 +34,6 @@ export async function deleteMeal(mealInfoDataEntry: singleMealInfoType) {
 
   } catch (error) {
     console.log(error);
-    throw new Error("Failed to delete meal");
+    throw new AppError("Exclusão de refeição rejeitada. Um erro ocorreu ao tentar excluir a refeição selecionada");
   }
 }

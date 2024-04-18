@@ -8,6 +8,7 @@ import { RouteParams } from "src/@types/routeParams";
 import { deleteMeal } from "@storage/meals/deleteMeal";
 import * as C from "./styles";
 import { Meal } from "src/@types/dataMealTypes";
+import { AppError } from "@utils/AppError";
 
 export type MealInfoTypes  = {
   day: string;
@@ -46,12 +47,16 @@ const MealData = () => {
   };
 
   async function mealExclusion() {
-    await deleteMeal(dataEntry);
-    navigation.navigate("home");
+    try {
+      await deleteMeal(dataEntry);
+    } catch (error) {
+      throw new AppError("Um erro ocorreu ao tentar executar mealExclusion")
+    } finally {
+      navigation.navigate("home");
+    }
   }
 
-  const deleteMealHandler = async () => {
-    try {
+ function deleteMealHandler () {
       Alert.alert(
         "Excluir Refeição",
         "Tem certeza que deseja excluir a refeição ?",
@@ -66,9 +71,6 @@ const MealData = () => {
           },
         ]
       );
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

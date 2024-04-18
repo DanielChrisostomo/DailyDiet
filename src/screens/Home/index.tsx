@@ -7,6 +7,7 @@ import { SectionList, View } from "react-native";
 import * as C from "./styles";
 import { getAllMeals } from "@storage/meals/getAllMeals";
 import { DataEntry } from "src/@types/dataMealTypes";
+import { AppError } from "@utils/AppError";
 
 
 const Home = () => {
@@ -43,7 +44,7 @@ const Home = () => {
       const data = await getAllMeals();
       setListData(data);
     } catch (error) {
-      console.log(error);
+      throw new AppError("Um erro ocorreu ao tentar buscar as refeições cadastradas.")
     }
   }
 
@@ -73,8 +74,8 @@ const Home = () => {
 
       <SectionList
         sections={listData}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index, section }) => (
+        keyExtractor={(index) => index.toString()}
+        renderItem={({ item, section }) => (
           <C.MealContainer
             onPress={() =>
               navigateToMealData(

@@ -25,7 +25,7 @@ const NewMeal = () => {
 
   async function HandleNewMealCreate() {
     try {
-      if (buttonState !== "REGULAR") {
+      if (buttonState !== "REGULAR" && name !== "" && description !== "" && day !== "" && hour !== "") {
 
         const meal: Meal = {
           meal: name,
@@ -61,7 +61,7 @@ const NewMeal = () => {
       } else {
         Alert.alert(
           "Cadastrar Refeição",
-          "Por favor indique se sua nova refeição está dentro da dieta ou fora da dieta"
+          "Por favor, informe os dados para que sua refeição possa ser cadastrada. Sua refeição está dentro da dieta ?"
         );
       }
     } catch (error) {
