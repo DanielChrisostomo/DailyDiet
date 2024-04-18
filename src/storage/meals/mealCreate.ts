@@ -1,14 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MEAL_DATA } from "@storage/StorageConfig";
 import { getAllMeals } from "./getAllMeals";
-import { DateEntry } from "src/@types/dataMealTypes";
+import { DataEntry } from "src/@types/dataMealTypes";
 
-export async function mealCreate (meal: DateEntry) {
+export async function mealCreate (meal: DataEntry) {
     try {
         
          let storageMeals = await getAllMeals();
 
-         const existingMealDayIndex = storageMeals.findIndex((m: DateEntry) => m.day === meal.day);
+         const existingMealDayIndex = storageMeals.findIndex((m: DataEntry) => m.day === meal.day);
 
          if (existingMealDayIndex !== -1) {
               storageMeals[existingMealDayIndex].data.push(...meal.data);
@@ -18,13 +18,9 @@ export async function mealCreate (meal: DateEntry) {
          
          await AsyncStorage.setItem(MEAL_DATA, JSON.stringify(storageMeals));
 
-        // await AsyncStorage.setItem(MEAL_DATA, JSON.stringify([]))
-      
     } catch (error) {
         throw error;
     }
 }
-
-
 
 

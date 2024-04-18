@@ -36,7 +36,7 @@ export const MealDate = styled.Text`
     font-family: ${theme.FONT_FAMILY.BOLD};
     color: ${theme.COLORS.GRAY_1};
     ` }
-    margin-bottom: 6px;
+    margin: 16px 0 12px;
 `
 
 export const MealContainer = styled.TouchableOpacity`

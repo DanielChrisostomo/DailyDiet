@@ -6,8 +6,20 @@ export declare global {
         newMeal:undefined;
         onDiet:undefined;
         notOnDiet:undefined;
-        mealData: undefined;
-        mealEdit: undefined;
+        mealData: {
+          hour: string;
+          meal: string;
+          status: string;
+          description: description;
+          day: string;
+        };
+        mealEdit:{
+          hour: string;
+          meal: string;
+          status: string;
+          description: description;
+          day: string;
+        }
       }
     }
   }

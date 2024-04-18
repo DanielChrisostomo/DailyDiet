@@ -6,8 +6,7 @@ import Button from "@components/Button"
 import ButtonSecundary from "@components/ButtonSecundary"
 import { mealCreate } from "@storage/meals/mealCreate"
 import { Alert, TextInput } from "react-native"
-import { DateEntry, Meal } from "src/@types/dataMealTypes";
-
+import {  DataEntry, Meal } from "src/@types/dataMealTypes";
 
 const NewMeal = () => {
   const [name, setName] = React.useState("")
@@ -35,7 +34,7 @@ const NewMeal = () => {
           status: buttonState, 
         };
 
-        const entry: DateEntry = {
+        const entry: DataEntry = {
           day: day,
           data: [meal],
         };

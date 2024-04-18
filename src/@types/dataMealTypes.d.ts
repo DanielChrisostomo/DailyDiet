@@ -5,7 +5,7 @@ export type Meal = {
     status: string;
   }
   
- export type DateEntry  = {
+ export type DataEntry  = {
     day: string;
     data: Meal[];
   }

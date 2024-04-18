@@ -3,8 +3,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeft  } from "phosphor-react-native"
 import { View } from "react-native";
 
-export const AreaSafeContainer = styled(SafeAreaView)`
-    background-color: ${({theme}) => theme.COLORS.GREEN_LIGHT};
+export const AreaSafeContainer = styled(SafeAreaView)<{ type: "RED" | "GREEN" }>`
+     background-color: ${({ theme, type }) =>
+    type === "GREEN" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     flex: 1;
 `
 
