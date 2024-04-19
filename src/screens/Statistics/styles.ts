@@ -10,8 +10,8 @@ type Props = {
   typeColor: ContainerTypeStyleProps;
 }
 
-export const AreaSafeContainer = styled(SafeAreaView)`
-    background-color: ${({theme}) => theme.COLORS.GREEN_LIGHT};
+export const AreaSafeContainer = styled(SafeAreaView)<Props>`
+    background-color: ${({theme, typeColor}) => typeColor === "GREEN" ? theme.COLORS.GREEN_LIGHT :  theme.COLORS.RED_LIGHT};
     flex: 1;
 `
 
@@ -31,8 +31,8 @@ export const Button = styled.TouchableOpacity`
     left: 12px;
 `
 
-export const Arrow = styled(ArrowLeft).attrs(({theme}) => ({
-  color: theme.COLORS.GREEN_DARK
+export const Arrow = styled(ArrowLeft).attrs<Props>(({theme, typeColor}) => ({
+  color: `${typeColor === "GREEN" ? theme.COLORS.GREEN_DARK :  theme.COLORS.RED_DARK}`
 }))``;
 
 export const GeneralStatistics = styled.View`

@@ -16,8 +16,12 @@ export const Button = styled.TouchableOpacity`
     right: 8px;
 `
 
-export const Arrow = styled(ArrowUpRight).attrs(({theme}) => ({
-  color: theme.COLORS.GREEN_DARK
+type ArrowProps = {
+  typeColor: "RED" | "GREEN";
+};
+
+export const Arrow = styled(ArrowUpRight).attrs<ArrowProps>(({theme, typeColor}) => ({
+  color: `${typeColor === "GREEN" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK }`
 }))``;
 
 export const Texto = styled.Text`

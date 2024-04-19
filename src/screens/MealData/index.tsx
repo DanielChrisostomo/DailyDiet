@@ -6,9 +6,9 @@ import { Alert } from "react-native";
 import Button from "@components/Button";
 import { RouteParams } from "src/@types/routeParams";
 import { deleteMeal } from "@storage/meals/deleteMeal";
-import * as C from "./styles";
 import { Meal } from "src/@types/dataMealTypes";
 import { AppError } from "@utils/AppError";
+import * as C from "./styles";
 
 export type MealInfoTypes  = {
   day: string;
@@ -37,13 +37,13 @@ const MealData = () => {
   };
 
   const navigateToMealEdit = (
+    description: string,
     hour: string,
+    day: string,
     meal: string,
     status: string,
-    description: string,
-    day: string
   ) => {
-    navigation.navigate("mealEdit", { hour, meal, status, description, day });
+    navigation.navigate("mealEdit", { description, hour, day, meal, status });
   };
 
   async function mealExclusion() {

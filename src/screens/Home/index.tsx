@@ -1,17 +1,22 @@
 import React, { useCallback } from "react";
+import { SectionList, View } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+
+import { getAllMeals } from "@storage/meals/getAllMeals";
+
 import Header from "@components/Header";
 import PercentageBox from "@components/PercentageBox";
 import Button from "@components/Button";
-import { SectionList, View } from "react-native";
-import * as C from "./styles";
-import { getAllMeals } from "@storage/meals/getAllMeals";
-import { DataEntry } from "src/@types/dataMealTypes";
+import { dietStatisticsNumbers } from "@storage/meals/dietStatisticsNumbers";
 import { AppError } from "@utils/AppError";
 
+import { DataEntry, StatisticsTypes } from "src/@types/dataMealTypes";
+import * as C from "./styles";
 
 const Home = () => {
   const [listData, setListData] = React.useState<DataEntry[]>([]);
+  const [statisticsState, setStatisticsState] =
+    React.useState<null | StatisticsTypes>(null);
 
   const navigation = useNavigation();
 
@@ -44,13 +49,27 @@ const Home = () => {
       const data = await getAllMeals();
       setListData(data);
     } catch (error) {
-      throw new AppError("Um erro ocorreu ao tentar buscar as refeições cadastradas.")
+      throw new AppError(
+        "Um erro ocorreu ao tentar buscar as refeições cadastradas."
+      );
+    }
+  }
+
+  async function fetchStatistics() {
+    try {
+      const { statistics } = await dietStatisticsNumbers();
+      if (statistics !== null) setStatisticsState(statistics);
+    } catch (error) {
+      throw new AppError(
+        "Não foi possível realizar a busca das estatísticas do aplicativo"
+      );
     }
   }
 
   useFocusEffect(
     useCallback(() => {
       fetchMeals();
+      fetchStatistics();
     }, [])
   );
 
@@ -59,9 +78,17 @@ const Home = () => {
       <Header />
 
       <View>
-        <PercentageBox typeColor="GREEN" />
+        <PercentageBox statistics={statisticsState} />
         <C.Button onPress={navigateToStatistics}>
-          <C.Arrow />
+          <C.Arrow
+            typeColor={
+              statisticsState !== null
+                ? statisticsState.dietPercentage >= 70
+                  ? "GREEN"
+                  : "RED"
+                : "GREEN"
+            }
+          />
         </C.Button>
       </View>
 
@@ -74,8 +101,8 @@ const Home = () => {
 
       <SectionList
         sections={listData}
-        keyExtractor={(index) => index.toString()}
-        renderItem={({ item, section }) => (
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index, section }) => (
           <C.MealContainer
             onPress={() =>
               navigateToMealData(
@@ -83,7 +110,7 @@ const Home = () => {
                 item.meal,
                 item.status,
                 item.description,
-                section.day,
+                section.day
               )
             }
           >

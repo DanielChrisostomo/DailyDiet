@@ -27,7 +27,11 @@ export async function deleteMeal(mealInfoDataEntry: singleMealInfoType) {
         )
       );
 
-      storageMeals[existingMealDayIndex].data = updatedMealsOfDay;
+      if (updatedMealsOfDay.length === 0) {
+        storageMeals.splice(existingMealDayIndex, 1);
+      } else {
+        storageMeals[existingMealDayIndex].data = updatedMealsOfDay;
+      }
 
       await AsyncStorage.setItem(MEAL_DATA, JSON.stringify(storageMeals));
     }
