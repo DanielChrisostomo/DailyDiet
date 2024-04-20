@@ -1,16 +1,22 @@
-import * as C from "./styles";
 import React from "react";
+import { Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { RouteParams } from "src/@types/routeParams";
+
+import { mealCreate } from "@storage/meals/mealCreate";
+import { saveMealChanges } from "@storage/meals/mealChange";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MEAL_DATA } from "@storage/StorageConfig";
+
 import Input from "@components/Input";
 import Button from "@components/Button";
 import ButtonSecundary from "@components/ButtonSecundary";
-import { RouteParams } from "src/@types/routeParams";
-import { Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MEAL_DATA } from "@storage/StorageConfig";
-import { AppError } from "@utils/AppError";
 import { MealInfoTypes } from "@screens/MealData";
-import { saveMealChanges } from "@storage/meals/mealChange";
+import { deleteMeal } from "@storage/meals/deleteMeal";
+
+import { AppError } from "@utils/AppError";
+import * as C from "./styles";
 
 const MealEdit = () => {
   const route = useRoute();
@@ -34,7 +40,7 @@ const MealEdit = () => {
     },
   };
 
-  const dataEntry: MealInfoTypes = {
+  let dataEntry: MealInfoTypes = {
     day: dateText,
     data: {
       description: descriptionText,
@@ -61,10 +67,25 @@ const MealEdit = () => {
         if (result) {
           const { mealIndex, storageMeals, existingMealDayIndex } = result;
           if (mealIndex !== -1) {
-            storageMeals[existingMealDayIndex].data[mealIndex] = dataEntry.data;
-            storageMeals[existingMealDayIndex].day = dateText;
-  
-            await AsyncStorage.setItem(MEAL_DATA, JSON.stringify(storageMeals));
+
+            if (storageMeals[existingMealDayIndex].day === dataEntry.day) {
+              storageMeals[existingMealDayIndex].day = dateText;
+              storageMeals[existingMealDayIndex].data[mealIndex] = dataEntry.data;
+              await AsyncStorage.setItem(MEAL_DATA, JSON.stringify(storageMeals));
+            } else { 
+              try {
+                await deleteMeal({
+                  day: storageMeals[existingMealDayIndex].day,
+                  data: storageMeals[existingMealDayIndex].data[mealIndex]
+                })
+                await mealCreate({
+                  day: dateText,
+                  data: [dataEntry.data]
+                });
+              } catch (error) {
+                console.log("erro aqui")
+              }
+            } 
   
             switch (buttonState) {
               case "GREEN_LIGHT":
@@ -78,11 +99,11 @@ const MealEdit = () => {
             }
           }
         } else {
-          throw new Error("Não foi possível salvar as alterações da refeição selecionada.");
+          throw new AppError("Não foi possível salvar as alterações da refeição selecionada.");
         }
       } catch (error) {
         throw new AppError(
-          "Um erro ocorreu ao tentar salvar as alterações da refeição selecionada"
+          "Não foi possível salvar as alterações da refeição selecionada."
         );
       }
     } else {
