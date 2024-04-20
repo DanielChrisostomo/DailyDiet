@@ -1,21 +1,24 @@
-import {
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
-import { Alert } from "react-native";
-import Button from "@components/Button";
-import { RouteParams } from "src/@types/routeParams";
+import React from "react";
+import { Alert, Modal } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { deleteMeal } from "@storage/meals/deleteMeal";
-import { Meal } from "src/@types/dataMealTypes";
+import Button from "@components/Button";
 import { AppError } from "@utils/AppError";
+
+import { RouteParams } from "src/@types/routeParams";
+import { Meal } from "src/@types/dataMealTypes";
+
 import * as C from "./styles";
 
-export type MealInfoTypes  = {
+export type MealInfoTypes = {
   day: string;
   data: Meal;
-}
+};
 
 const MealData = () => {
+  const [modalVisible, setModalVisible] = React.useState(false);
+
   const navigation = useNavigation();
 
   const route = useRoute();
@@ -29,8 +32,8 @@ const MealData = () => {
       meal: meal,
       hour: hour,
       status: status,
-    }
-  }
+    },
+  };
 
   const navigateToHome = () => {
     navigation.navigate("home");
@@ -41,7 +44,7 @@ const MealData = () => {
     hour: string,
     day: string,
     meal: string,
-    status: string,
+    status: string
   ) => {
     navigation.navigate("mealEdit", { description, hour, day, meal, status });
   };
@@ -50,31 +53,16 @@ const MealData = () => {
     try {
       await deleteMeal(dataEntry);
     } catch (error) {
-      throw new AppError("Um erro ocorreu ao tentar executar mealExclusion")
+      throw new AppError("Um erro ocorreu ao tentar executar mealExclusion");
     } finally {
       navigation.navigate("home");
     }
   }
 
- function deleteMealHandler () {
-      Alert.alert(
-        "Excluir Refeição",
-        "Tem certeza que deseja excluir a refeição ?",
-        [
-          {
-            text: "sim",
-            onPress: mealExclusion,
-          },
-          {
-            text: "não",
-            style: "cancel",
-          },
-        ]
-      );
-  };
 
   return (
-    <C.AreaSafeContainer type={status === "GREEN_LIGHT" ? "GREEN" : "RED"}>
+    <>
+    <C.AreaSafeContainer typeColor={status === "GREEN_LIGHT" ? "GREEN" : "RED"} >
       <C.TitleContainer>
         <C.Button onPress={navigateToHome}>
           <C.Arrow />
@@ -109,12 +97,33 @@ const MealData = () => {
         />
         <Button
           texto="Excluir Refeição"
-          onPress={deleteMealHandler}
+          onPress={() => setModalVisible(!modalVisible)}
           typeColor="LIGHT"
           typeIcon="REMOVE"
         />
       </C.NewMealContainer>
+
     </C.AreaSafeContainer>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <C.ModalOpacity>
+        <C.ModalContainer>
+          <C.modalText>Deseja realmente excluir o registro da refeição ?</C.modalText>
+          <C.inRow>
+            <Button typeColor="LIGHT" texto="Cancelar" onPress={() => setModalVisible(!modalVisible)} width={140} />
+            <Button typeColor="DARK" texto="Sim, Excluir" onPress={mealExclusion} width={140}/>
+          </C.inRow>
+        </C.ModalContainer>
+        </C.ModalOpacity>
+      </Modal>
+      </>
   );
 };
 

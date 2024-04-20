@@ -72,6 +72,7 @@ const MealEdit = () => {
               storageMeals[existingMealDayIndex].day = dateText;
               storageMeals[existingMealDayIndex].data[mealIndex] = dataEntry.data;
               await AsyncStorage.setItem(MEAL_DATA, JSON.stringify(storageMeals));
+
             } else { 
               try {
                 await deleteMeal({
@@ -98,6 +99,7 @@ const MealEdit = () => {
                 console.log("Error ");
             }
           }
+          
         } else {
           throw new AppError("Não foi possível salvar as alterações da refeição selecionada.");
         }

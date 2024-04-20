@@ -5,7 +5,7 @@ import { Plus, PencilSimpleLine, Trash } from "phosphor-react-native"
 
 export type ButtonTypeStyleProps = "DARK" | "LIGHT";
 export type ButtonTypeIconProps = "PLUS" | "REMOVE" | "EDIT";
-export type ButtonWidthProps = 200 | '100%';
+export type ButtonWidthProps = number | '100%';
 
 type Props = {
   typeColor: ButtonTypeStyleProps;

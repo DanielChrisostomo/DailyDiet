@@ -3,9 +3,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeft  } from "phosphor-react-native"
 import { View } from "react-native";
 
-export const AreaSafeContainer = styled(SafeAreaView)<{ type: "RED" | "GREEN" }>`
-     background-color: ${({ theme, type }) =>
-    type === "GREEN" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+type Props = {
+    typeColor: "RED" | "GREEN";
+}
+
+export const AreaSafeContainer = styled(SafeAreaView)<Props>`
+     background-color: ${({ theme, typeColor,  }) =>
+    typeColor === "GREEN" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT };
     flex: 1;
 `
 
@@ -105,3 +109,38 @@ export const Status =  styled(View)<{ type: "RED" | "GREEN" }>`
     border-radius: 4px; 
 `
 
+export const ModalOpacity = styled.View`
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    background-color:  rgba(0,0,0,0.25);
+`
+
+export const ModalContainer = styled.View`
+    ${({theme}) => css`
+    background-color: ${theme.COLORS.WHITE};
+    border: 1px solid ${theme.COLORS.GRAY_1} ;
+    `}
+    border-radius: 8px;
+    padding: 26px;
+    align-self: center;
+    width: 85%;
+`
+
+export const inRow = styled.View`
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+`
+
+export const modalText = styled.Text`
+${({theme}) => css`
+    color: ${theme.COLORS.GRAY_1};
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.LG}px;
+    `}
+    text-align: center;
+    margin-bottom: 36px
+`
